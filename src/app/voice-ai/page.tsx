@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 import { FadeIn, FadeInStagger, FadeInStaggerChild } from "@/components/AnimatedSection";
 import { FloatingOrbs } from "@/components/FloatingOrbs";
+import RetellCallButton from "@/components/RetellCallButton";
+
+const AGENT_ID = "agent_454084f191fe28e0c6b0f2a8cb";
 
 const capabilities = [
   {
@@ -116,17 +119,10 @@ export default function VoiceAI() {
           </FadeIn>
 
           <FadeIn delay={0.3}>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-white transition-all hover:shadow-lg hover:shadow-primary/25"
-              >
-                Hear a Demo
-                <ArrowRight
-                  size={18}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </Link>
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-start">
+              <div className="w-full max-w-xs">
+                <RetellCallButton agentId={AGENT_ID} />
+              </div>
               <Link
                 href="/industries"
                 className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-4 text-base font-medium text-foreground transition-colors hover:bg-surface"
@@ -217,7 +213,7 @@ export default function VoiceAI() {
                 speak for themselves
               </h2>
               <p className="mt-4 text-lg text-muted">
-                Companies using Happi voice agents see measurable improvements
+                Companies using happi agent see measurable improvements
                 from day one.
               </p>
             </FadeIn>

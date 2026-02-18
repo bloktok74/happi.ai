@@ -27,7 +27,7 @@ export function Navbar() {
               <span className="text-sm font-bold text-white">H</span>
             </div>
             <span className="font-[family-name:var(--font-inter)] text-lg font-semibold text-foreground">
-              Happi Agents
+              happi agent
             </span>
           </Link>
 

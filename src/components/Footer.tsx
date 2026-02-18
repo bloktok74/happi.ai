@@ -31,7 +31,7 @@ export function Footer() {
                 <span className="text-sm font-bold text-white">H</span>
               </div>
               <span className="font-[family-name:var(--font-inter)] text-lg font-semibold">
-                Happi Agents
+                happi agent
               </span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
@@ -40,7 +40,7 @@ export function Footer() {
               follow-up.
             </p>
             <p className="mt-6 text-xs text-muted">
-              &copy; {new Date().getFullYear()} Happi Agents. All rights
+              &copy; {new Date().getFullYear()} happi agent. All rights
               reserved.
             </p>
           </div>

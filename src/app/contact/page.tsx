@@ -1,6 +1,7 @@
 "use client";
 
-import { Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Mail, MapPin, Clock, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { FloatingOrbs } from "@/components/FloatingOrbs";
 
@@ -8,8 +9,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "blok@happiagent.ai",
-    href: "mailto:blok@happiagent.ai",
+    value: "hello@happiagent.ai",
+    href: "mailto:hello@happiagent.ai",
   },
   {
     icon: MapPin,
@@ -26,6 +27,56 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    industry: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "";
+
+      if (!webhookUrl) {
+        throw new Error("Webhook URL not configured");
+      }
+
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to submit");
+
+      setStatus("success");
+      setFormData({ name: "", email: "", phone: "", company: "", industry: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "An error occurred");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   return (
     <>
       {/* Hero */}
@@ -64,10 +115,27 @@ export default function Contact() {
                   automate.
                 </p>
 
+                {status === "success" && (
+                  <div className="mt-6 flex items-center gap-3 rounded-xl border border-green-200 bg-green-50 p-4">
+                    <CheckCircle size={20} className="shrink-0 text-green-600" />
+                    <p className="text-sm font-medium text-green-800">
+                      Message sent! We&apos;ll get back to you within 24 hours.
+                    </p>
+                  </div>
+                )}
+
+                {status === "error" && (
+                  <div className="mt-6 flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
+                    <AlertCircle size={20} className="shrink-0 text-red-600" />
+                    <p className="text-sm font-medium text-red-800">
+                      {errorMessage || "Something went wrong. Please try again."}
+                    </p>
+                  </div>
+                )}
+
                 <form
                   className="mt-8 space-y-6"
-                  action="https://formspree.io/f/placeholder"
-                  method="POST"
+                  onSubmit={handleSubmit}
                 >
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
@@ -82,6 +150,8 @@ export default function Contact() {
                         id="name"
                         name="name"
                         required
+                        value={formData.name}
+                        onChange={handleChange}
                         className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted outline-none transition-colors focus:border-primary"
                         placeholder="Your name"
                       />
@@ -98,10 +168,30 @@ export default function Contact() {
                         id="email"
                         name="email"
                         required
+                        value={formData.email}
+                        onChange={handleChange}
                         className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted outline-none transition-colors focus:border-primary"
                         placeholder="you@company.com"
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-foreground"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted outline-none transition-colors focus:border-primary"
+                      placeholder="Your phone number"
+                    />
                   </div>
 
                   <div>
@@ -115,6 +205,8 @@ export default function Contact() {
                       type="text"
                       id="company"
                       name="company"
+                      value={formData.company}
+                      onChange={handleChange}
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted outline-none transition-colors focus:border-primary"
                       placeholder="Your company name"
                     />
@@ -130,6 +222,8 @@ export default function Contact() {
                     <select
                       id="industry"
                       name="industry"
+                      value={formData.industry}
+                      onChange={handleChange}
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary"
                     >
                       <option value="">Select your industry</option>
@@ -148,26 +242,6 @@ export default function Contact() {
 
                   <div>
                     <label
-                      htmlFor="interest"
-                      className="block text-sm font-medium text-foreground"
-                    >
-                      What are you interested in?
-                    </label>
-                    <select
-                      id="interest"
-                      name="interest"
-                      className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary"
-                    >
-                      <option value="">Select a service</option>
-                      <option value="voice-ai">Voice AI Agents</option>
-                      <option value="automation">Workflow Automation</option>
-                      <option value="both">Both</option>
-                      <option value="not-sure">Not sure yet</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label
                       htmlFor="message"
                       className="block text-sm font-medium text-foreground"
                     >
@@ -177,6 +251,8 @@ export default function Contact() {
                       id="message"
                       name="message"
                       rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
                       className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder-muted outline-none transition-colors focus:border-primary"
                       placeholder="Tell us about your business and what you'd like to automate..."
                     />
@@ -184,9 +260,10 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-white transition-all hover:shadow-lg hover:shadow-primary/25"
+                    disabled={status === "submitting"}
+                    className="group flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 text-base font-semibold text-white transition-all hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {status === "submitting" ? "Sending..." : "Send Message"}
                     <ArrowRight
                       size={18}
                       className="transition-transform group-hover:translate-x-1"

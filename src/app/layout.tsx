@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Happi Agents — AI Voice Agents & Workflow Automation",
+  title: "happi agent — AI Voice Agents & Workflow Automation",
   description:
     "AI-powered voice agents and workflow automation that handle sales calls, customer support, and repetitive business processes 24/7. Built for debt relief, cosmetic surgery, construction, financial services, and property management.",
   keywords: [
@@ -23,11 +23,11 @@ export const metadata: Metadata = {
     "customer service AI",
   ],
   openGraph: {
-    title: "Happi Agents — AI Voice Agents & Workflow Automation",
+    title: "happi agent — AI Voice Agents & Workflow Automation",
     description:
       "AI-powered voice agents and workflow automation for growing businesses.",
     url: "https://happiagent.ai",
-    siteName: "Happi Agents",
+    siteName: "happi agent",
     type: "website",
   },
 };

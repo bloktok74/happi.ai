@@ -102,7 +102,15 @@ export default function Home() {
             </h1>
           </FadeIn>
 
-          <FadeIn delay={0.2}>
+          <FadeIn delay={0.15}>
+            <p className="mx-auto mt-6 flex items-center justify-center gap-6 text-2xl font-medium tracking-wide sm:gap-10 sm:text-3xl md:text-4xl">
+              <span className="text-muted">Simplify.</span>
+              <span className="gradient-text">Automate.</span>
+              <span className="text-muted">Grow.</span>
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.25}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
               Voice AI that answers calls and closes deals. Workflow automation
               that eliminates repetitive tasks. Built for businesses ready to
@@ -206,7 +214,7 @@ export default function Home() {
           <FadeIn>
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-                Why Happi Agents
+                Why happi agent
               </p>
               <h2 className="mt-4 font-[family-name:var(--font-inter)] text-4xl font-semibold tracking-tight sm:text-5xl">
                 Built different

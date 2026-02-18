@@ -35,7 +35,7 @@ const timeline = [
   {
     title: "The Solution We Built",
     description:
-      "We created Happi Agents to bridge that gap. A team that combines AI expertise with deep business process understanding to deliver automation that actually works in the real world.",
+      "We created happi agent to bridge that gap. A team that combines AI expertise with deep business process understanding to deliver automation that actually works in the real world.",
   },
   {
     title: "Where We're Going",
@@ -66,7 +66,7 @@ export default function About() {
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Happi Agents is an AI automation studio. We help growing
+              happi agent is an AI automation studio. We help growing
               businesses replace repetitive manual work with intelligent AI
               agents and automated workflows.
             </p>
