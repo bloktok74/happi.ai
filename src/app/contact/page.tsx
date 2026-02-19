@@ -15,7 +15,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "United States",
+    value: "Irvine, CA",
     href: null,
   },
   {
@@ -227,16 +227,16 @@ export default function Contact() {
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-primary"
                     >
                       <option value="">Select your industry</option>
-                      <option value="debt-relief">Debt Relief</option>
-                      <option value="cosmetic-surgery">Cosmetic Surgery</option>
-                      <option value="construction">Construction</option>
-                      <option value="financial-services">
+                      <option value="Debt Relief">Debt Relief</option>
+                      <option value="Cosmetic Surgery">Cosmetic Surgery</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Financial Services">
                         Financial Services
                       </option>
-                      <option value="property-management">
+                      <option value="Property Management">
                         Property Management
                       </option>
-                      <option value="other">Other</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
 
