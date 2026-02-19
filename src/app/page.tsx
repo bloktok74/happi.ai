@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 import { FadeIn, FadeInStagger, FadeInStaggerChild } from "@/components/AnimatedSection";
 import { FloatingOrbs } from "@/components/FloatingOrbs";
+import RetellCallButton from "@/components/RetellCallButton";
+
+const AGENT_ID = "agent_454084f191fe28e0c6b0f2a8cb";
 
 const services = [
   {
@@ -204,6 +207,44 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Voice AI Demo */}
+      <section className="relative border-t border-border py-32 overflow-hidden">
+        <div className="relative mx-auto max-w-7xl px-6">
+          <FadeIn>
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="mx-auto mb-8 flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-accent/10 ring-1 ring-primary/20">
+                <svg
+                  width="56"
+                  height="56"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="text-primary"
+                >
+                  {/* Retro telephone */}
+                  <path
+                    d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.24 1.01l-2.2 2.2z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+                Try it now
+              </p>
+              <h2 className="mt-4 font-[family-name:var(--font-inter)] text-4xl font-semibold tracking-tight sm:text-5xl">
+                Talk to our AI agent
+              </h2>
+              <p className="mt-4 text-lg text-muted">
+                Don&apos;t take our word for it. Click the button below and have
+                a real conversation with our voice AI — right in your browser.
+              </p>
+              <div className="mx-auto mt-10 max-w-xs">
+                <RetellCallButton agentId={AGENT_ID} />
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
